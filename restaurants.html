@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Mom's Touch Restaurants - Worldwide Locations</title>
+    <link rel="stylesheet" href="restaurants.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="contact.html" class="brand">
+                <img src="https://i.pinimg.com/736x/1e/1d/b8/1e1db8136895a06f427740560a2bd6e1.jpg" alt="Mother & Daughter Logo" class="brand-logo">
+                <span class="mom">Mom’s</span>
+                <span class="touch">Touch</span>
+            </a>
+
+            <nav class="site-nav">
+                <!-- <a class="nav-link" href="index.html">Home</a> -->
+                <a class="nav-link" href="menu.html">Menu</a>
+                <a class="nav-link active" href="restaurants.html">Restaurants</a>
+                <a class="nav-link" href="offers.html">Offers</a>
+                <!-- <a class="nav-link" href="checkout.html">Checkout</a> -->
+                <a class="nav-link" href="contact.html">Contact</a>
+                <!-- <a class="nav-link" href="profile.html">Profile</a> -->
+            </nav>
+            
+            <div class="header-actions">
+                <button class="cart-btn" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <a href="profile.html" class="user-btn" title="Profile">
+                    <i class="fas fa-user"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="restaurants-header">
+            <h1><i class="fas fa-store"></i> Find Your Nearest Mom's Touch</h1>
+            <p class="subtitle">Discover 150+ restaurants across 12 countries. Dine-in, takeaway, or get delivery.</p>
+            
+            <div class="location-selector-container">
+                <div class="current-location-display">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="location-info">
+                        <span class="location-label">Your Location:</span>
+                        <span class="location-text" id="currentLocationText">Select your location</span>
+                    </div>
+                    <button class="change-location-btn" id="changeLocationBtn">
+                        <i class="fas fa-pencil-alt"></i> Change
+                    </button>
+                </div>
+                
+                <div class="location-actions">
+                    <button class="location-action-btn primary" id="detectLocationBtn">
+                        <i class="fas fa-location-crosshairs"></i> Use Current Location
+                    </button>
+                    <button class="location-action-btn secondary" id="browseAllBtn">
+                        <i class="fas fa-globe-asia"></i> Browse All Restaurants
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <i class="fas fa-store stat-icon"></i>
+                <div class="stat-content">
+                    <h3>150+</h3>
+                    <p>Restaurants</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-flag stat-icon"></i>
+                <div class="stat-content">
+                    <h3>12</h3>
+                    <p>Countries</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-star stat-icon"></i>
+                <div class="stat-content">
+                    <h3>4.8</h3>
+                    <p>Avg Rating</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-clock stat-icon"></i>
+                <div class="stat-content">
+                    <h3>24/7</h3>
+                    <p>Some Locations</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="restaurants-layout">
+            <!-- Filters Sidebar -->
+            <aside class="restaurant-filters">
+                <div class="filters-header">
+                    <h3><i class="fas fa-filter"></i> Filter & Sort</h3>
+                    <button class="clear-filters" id="clearFiltersBtn">Reset All</button>
+                </div>
+
+                <!-- Search -->
+                <div class="filter-group">
+                    <h4><i class="fas fa-search"></i> Search Restaurants</h4>
+                    <div class="search-box">
+                        <input type="text" id="searchRestaurants" placeholder="Search by name or area...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+
+                <!-- Sort -->
+                <div class="filter-group">
+                    <h4><i class="fas fa-sort-amount-down"></i> Sort By</h4>
+                    <div class="sort-options">
+                        <label class="sort-option">
+                            <input type="radio" name="sort" value="distance" checked>
+                            <span class="radio-checkmark"></span>
+                            <span class="sort-label">
+                                <i class="fas fa-location-arrow"></i> Nearest First
+                            </span>
+                        </label>
+                        <label class="sort-option">
+                            <input type="radio" name="sort" value="rating">
+                            <span class="radio-checkmark"></span>
+                            <span class="sort-label">
+                                <i class="fas fa-star"></i> Highest Rated
+                            </span>
+                        </label>
+                        <label class="sort-option">
+                            <input type="radio" name="sort" value="name">
+                            <span class="radio-checkmark"></span>
+                            <span class="sort-label">
+                                <i class="fas fa-sort-alpha-down"></i> Name A-Z
+                            </span>
+                        </label>
+                        <label class="sort-option">
+                            <input type="radio" name="sort" value="popular">
+                            <span class="radio-checkmark"></span>
+                            <span class="sort-label">
+                                <i class="fas fa-fire"></i> Most Popular
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Distance -->
+                <div class="filter-group">
+                    <h4><i class="fas fa-route"></i> Distance</h4>
+                    <div class="distance-control">
+                        <input type="range" min="1" max="50" value="10" class="distance-slider" id="distanceSlider">
+                        <div class="distance-labels">
+                            <span>1 km</span>
+                            <span id="distanceValue">10 km</span>
+                            <span>50 km</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="filter-group">
+                    <h4><i class="fas fa-concierge-bell"></i> Services</h4>
+                    <div class="filter-chips">
+                        <button class="filter-chip active" data-filter="dine-in">
+                            <i class="fas fa-utensils"></i> Dine-in
+                        </button>
+                        <button class="filter-chip active" data-filter="takeaway">
+                            <i class="fas fa-shopping-bag"></i> Takeaway
+                        </button>
+                        <button class="filter-chip active" data-filter="delivery">
+                            <i class="fas fa-truck"></i> Delivery
+                        </button>
+                        <button class="filter-chip" data-filter="drive-thru">
+                            <i class="fas fa-car"></i> Drive-thru
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div class="filter-group">
+                    <h4><i class="fas fa-star"></i> Features</h4>
+                    <div class="filter-chips">
+                        <button class="filter-chip" data-filter="parking">
+                            <i class="fas fa-parking"></i> Parking
+                        </button>
+                        <button class="filter-chip" data-filter="wifi">
+                            <i class="fas fa-wifi"></i> Free WiFi
+                        </button>
+                        <button class="filter-chip" data-filter="outdoor">
+                            <i class="fas fa-umbrella-beach"></i> Outdoor
+                        </button>
+                        <button class="filter-chip" data-filter="kids">
+                            <i class="fas fa-child"></i> Kids Area
+                        </button>
+                        <button class="filter-chip" data-filter="24/7">
+                            <i class="fas fa-clock"></i> 24/7
+                        </button>
+                        <button class="filter-chip" data-filter="vegetarian">
+                            <i class="fas fa-leaf"></i> Veg Options
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="filter-group">
+                    <h4><i class="fas fa-clock"></i> Status</h4>
+                    <div class="status-filters">
+                        <label class="status-toggle">
+                            <input type="checkbox" id="openNowToggle" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Open Now</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="apply-filters-btn" id="applyFiltersBtn">
+                    <i class="fas fa-check"></i> Apply Filters
+                </button>
+            </aside>
+
+            <!-- Main Content -->
+            <section class="restaurants-content">
+                <div class="content-header">
+                    <div class="results-info">
+                        <h2 id="resultsTitle">Restaurants Near You</h2>
+                        <div class="results-count">
+                            <span id="restaurantsCount">0</span> restaurants found
+                        </div>
+                    </div>
+                    
+                    <div class="view-controls">
+                        <div class="view-toggle">
+                            <button class="view-btn active" data-view="grid" id="gridViewBtn">
+                                <i class="fas fa-th-large"></i> Grid
+                            </button>
+                            <button class="view-btn" data-view="list" id="listViewBtn">
+                                <i class="fas fa-list"></i> List
+                            </button>
+                            <button class="view-btn" data-view="map" id="mapViewBtn">
+                                <i class="fas fa-map"></i> Map
+                            </button>
+                        </div>
+                        <button class="refresh-btn" id="refreshBtn">
+                            <i class="fas fa-sync-alt"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div class="loading-container" id="loadingContainer">
+                    <div class="loading-spinner"></div>
+                    <p>Finding restaurants near you...</p>
+                </div>
+
+                <!-- No Results -->
+                <div class="no-results" id="noResultsContainer" style="display: none;">
+                    <i class="fas fa-search-location"></i>
+                    <h3>No restaurants found</h3>
+                    <p>Try adjusting your filters or search in a different area</p>
+                    <button class="btn-primary" id="resetSearchBtn">Reset Search</button>
+                </div>
+
+                <!-- Grid View -->
+                <div class="restaurants-grid" id="restaurantsGrid">
+                    <!-- Restaurant cards will be loaded here -->
+                </div>
+
+                <!-- List View -->
+                <div class="restaurants-list-view" id="restaurantsListView" style="display: none;">
+                    <!-- List view items will be loaded here -->
+                </div>
+
+                <!-- Map View -->
+                <div class="map-container" id="mapContainer" style="display: none;">
+                    <div id="restaurantsMap"></div>
+                    <div class="map-controls">
+                        <button class="map-control-btn" id="locateMeBtn">
+                            <i class="fas fa-location-arrow"></i> Locate Me
+                        </button>
+                        <button class="map-control-btn" id="zoomInBtn">
+                            <i class="fas fa-search-plus"></i>
+                        </button>
+                        <button class="map-control-btn" id="zoomOutBtn">
+                            <i class="fas fa-search-minus"></i>
+                        </button>
+                    </div>
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <span class="legend-dot open"></span> Open Now
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot closed"></span> Closed
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot user"></span> Your Location
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="paginationContainer">
+                    <button class="pagination-btn prev" disabled>
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <div class="page-numbers">
+                        <span class="page-number active">1</span>
+                        <span class="page-number">2</span>
+                        <span class="page-number">3</span>
+                    </div>
+                    <button class="pagination-btn next">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Location Selection Modal -->
+    <div class="modal" id="locationModal">
+        <div class="modal-content location-modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-map-marker-alt"></i> Select Your Location</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="location-methods">
+                    <!-- Method 1: Current Location -->
+                    <div class="location-method">
+                        <div class="method-header">
+                            <i class="fas fa-location-crosshairs method-icon"></i>
+                            <div class="method-info">
+                                <h4>Use My Current Location</h4>
+                                <p>Allow access to your device location for accurate results</p>
+                            </div>
+                        </div>
+                        <button class="method-btn primary" id="modalDetectLocation">
+                            <i class="fas fa-crosshairs"></i> Detect Location
+                        </button>
+                    </div>
+
+                    <!-- Method 2: Search -->
+                    <div class="location-method">
+                        <div class="method-header">
+                            <i class="fas fa-search method-icon"></i>
+                            <div class="method-info">
+                                <h4>Search Location</h4>
+                                <p>Enter city, area, or landmark</p>
+                            </div>
+                        </div>
+                        <div class="search-container">
+                            <input type="text" id="modalLocationSearch" placeholder="Enter city or area...">
+                            <div class="search-results" id="searchResults">
+                                <!-- Search results will appear here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Method 3: Popular Cities -->
+                    <div class="location-method">
+                        <div class="method-header">
+                            <i class="fas fa-city method-icon"></i>
+                            <div class="method-info">
+                                <h4>Popular Cities</h4>
+                                <p>Select from our major locations</p>
+                            </div>
+                        </div>
+                        <div class="popular-cities">
+                            <button class="city-chip" data-city="Seoul" data-country="South Korea">
+                                <i class="fas fa-building"></i> Seoul
+                            </button>
+                            <button class="city-chip" data-city="Busan" data-country="South Korea">
+                                <i class="fas fa-umbrella-beach"></i> Busan
+                            </button>
+                            <button class="city-chip" data-city="Tokyo" data-country="Japan">
+                                <i class="fas fa-torii-gate"></i> Tokyo
+                            </button>
+                            <button class="city-chip" data-city="Singapore" data-country="Singapore">
+                                <i class="fas fa-globe-asia"></i> Singapore
+                            </button>
+                            <button class="city-chip" data-city="Dubai" data-country="UAE">
+                                <i class="fas fa-mosque"></i> Dubai
+                            </button>
+                            <button class="city-chip" data-city="New York" data-country="USA">
+                                <i class="fas fa-statue-of-liberty"></i> New York
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Method 4: Recently Used -->
+                    <div class="location-method">
+                        <div class="method-header">
+                            <i class="fas fa-history method-icon"></i>
+                            <div class="method-info">
+                                <h4>Recent Locations</h4>
+                                <p>Your previously selected locations</p>
+                            </div>
+                        </div>
+                        <div class="recent-locations" id="recentLocations">
+                            <!-- Recent locations will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelLocation">Cancel</button>
+                <button class="btn-primary" id="confirmLocation" disabled>
+                    <i class="fas fa-check"></i> Use This Location
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Restaurant Detail Modal -->
+    <div class="modal" id="restaurantModal">
+        <div class="modal-content restaurant-modal">
+            <div class="modal-header">
+                <h3 id="modalRestaurantName">Restaurant Name</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Content will be loaded by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Mom's Touch</h4>
+                    <p>Experience world cuisine at your doorstep. Order from 12+ countries.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="about.html">About Us</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="help.html">Help Center</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 11 Seoae-ro 1-gil, Jung District, Seoul, South Korea</p>
+                    <p><i class="fas fa-phone"></i> +82 2-1234-5678</p>
+                    <p><i class="fas fa-envelope"></i> order@momstouch.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2004-2024 Mom's Touch. All rights reserved.</p>
+                <p style="margin-top: 10px; font-size: 12px;">맛의 전쟁 - 엄마의 손맛 | 대한민국 대표 햄버거·치킨 프랜차이즈</p>
+                <p style="margin-top: 10px; font-size: 12px; color: #888;">This website is for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <script src="restaurants.js" defer></script>
+</body>
+</html>

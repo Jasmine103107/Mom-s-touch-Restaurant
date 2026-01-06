@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's Touch - Special Offers & Deals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-red: #e60012;
+            --secondary-red: #ff3b30;
+            --dark-gray: #333333;
+            --light-gray: #f5f5f5;
+            --text-gray: #666666;
+            --white: #ffffff;
+            --gold: #ffd700;
+            --orange: #ff6b00;
+            --green: #2ecc71;
+            --blue: #0b76d1;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: #fffaf0; 
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            /* background: URL'(https://img.wongnai.com/p/1920x0/2023/03/17/4618fb5ef77d43c0b38bbeabebe2faa3.jpg)'; */
+         }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            color: var(--primary-red);
+            font-size: 28px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-red);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: var(--dark-gray);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        nav a.active {
+            color: var(--primary-red);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-red);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark-gray);
+            cursor: pointer;
+        }
+
+        /* Hero Banner */
+        .offer-hero {
+            background: linear-gradient(135deg, #e60012 0%, #ff3b30 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-hero::before {
+            content: '✨';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 50px;
+            opacity: 0.2;
+        }
+
+        .offer-hero::after {
+            content: '🔥';
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 50px;
+            opacity: 0.2;
+        }
+
+        .offer-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .offer-hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .offer-count {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 18px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark-gray);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-red);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        /* Offers Grid */
+        .offers-section {
+            padding: 80px 0;
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        /* Offer Card */
+        .offer-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .offer-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--primary-red);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .offer-badge.hot {
+            background: var(--orange);
+        }
+
+        .offer-badge.new {
+            background: var(--green);
+        }
+
+        .offer-badge.exclusive {
+            background: var(--gold);
+            color: #333;
+        }
+
+        .offer-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .offer-content {
+            padding: 25px;
+        }
+
+        .offer-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark-gray);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .offer-description {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .offer-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+
+        .offer-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-red);
+        }
+
+        .offer-original {
+            text-decoration: line-through;
+            color: var(--text-gray);
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        .offer-discount {
+            background: var(--green);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .offer-terms {
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed #eee;
+        }
+
+        .offer-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-primary, .btn-secondary {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary-red);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-red);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-red);
+            border: 2px solid var(--primary-red);
+        }
+
+        .btn-secondary:hover {
+            background: #fff5f5;
+        }
+
+        /* Coupon Section */
+        .coupon-section {
+            background: linear-gradient(135deg, #fffaf0 0%, #fff5f5 100%);
+            padding: 80px 0;
+        }
+
+        .coupon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .coupon-card {
+            background: white;
+            border: 2px dashed var(--primary-red);
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .coupon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(230, 0, 18, 0.1);
+        }
+
+        .coupon-icon {
+            width: 60px;
+            height: 60px;
+            background: #fff5f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary-red);
+            flex-shrink: 0;
+        }
+
+        .coupon-content {
+            flex: 1;
+        }
+
+        .coupon-code {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--dark-gray);
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .coupon-desc {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .coupon-validity {
+            font-size: 12px;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn {
+            background: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: var(--secondary-red);
+        }
+
+        /* App Exclusive Section */
+        .app-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #0b76d1 0%, #0964b3 100%);
+            color: white;
+        }
+
+        .app-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .app-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .app-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .app-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .app-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .app-feature i {
+            color: var(--gold);
+            font-size: 20px;
+        }
+
+        .app-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .app-btn {
+            padding: 15px 25px;
+            background: white;
+            color: var(--blue);
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s;
+        }
+
+        .app-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .app-image {
+            text-align: center;
+        }
+
+        .app-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* How to Use Section */
+        .howto-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .howto-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            background: #f9f9f9;
+            transition: transform 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 auto 20px;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+        }
+
+        .step-desc {
+            color: var(--text-gray);
+            font-size: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--primary-red);
+        }
+
+        .footer-about p {
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h4::after, .footer-contact h4::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary-red);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary-red);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .offer-hero h1 {
+                font-size: 40px;
+            }
+            
+            .offer-hero p {
+                font-size: 18px;
+            }
+            
+            .offers-grid, .coupon-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .app-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .app-content {
+                order: 2;
+            }
+            
+            .app-image {
+                order: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: all 0.3s;
+                z-index: 999;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .offer-hero {
+                padding: 60px 0;
+            }
+
+            .offer-hero h1 {
+                font-size: 32px;
+            }
+
+            .offer-hero p {
+                font-size: 16px;
+                padding: 0 15px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .offers-section, .coupon-section, .app-section, .howto-section {
+                padding: 60px 0;
+            }
+            
+            .offer-actions {
+                flex-direction: column;
+            }
+            
+            .app-buttons {
+                flex-direction: column;
+            }
+            
+            .howto-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="homepage.html" class="logo">
+                <i class="fas fa-hamburger logo-icon"></i>
+                <div class="logo-text">MOM'S<span>TOUCH</span></div>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="restaurants.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="offers.html" class="active">Offers</a></li>
+                    <li><a href="about">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="offer-hero">
+        <div class="container">
+            <h1>🔥 Exclusive Offers & Deals 🔥</h1>
+            <p>Save big on your favorite Mom's Touch burgers, chicken, and more! Limited time offers available.</p>
+            <div class="offer-count">🎁 12 Active Offers Available</div>
+        </div>
+    </section>
+
+    <!-- Current Offers Section -->
+    <section class="offers-section" id="offers">
+        <div class="container">
+            <div class="section-title">
+                <h2>Current Promotions</h2>
+                <p class="section-subtitle">Valid until Jan 27, 2026</p>
+            </div>
+            
+            <div class="offers-grid" id="offersGrid">
+                <!-- Offer 1 -->
+                <div class="offer-card">
+                    <div class="offer-badge hot">🔥 HOT DEAL</div>
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" alt="Signature Burger Combo" class="offer-image">
+                    <div class="offer-content">
+                        <h3 class="offer-title">Signature Burger + Fries + Drink Combo</h3>
+                        <p class="offer-description">Get our best-selling signature burger with crispy fries and a refreshing drink at a special price.</p>
+                        <div class="offer-details">
+                            <div>
+                                <span class="offer-price">₩8,900</span>
+                                <span class="offer-original">₩11,500</span>
+                            </div>
+                            <div class="offer-discount">22% OFF</div>
+                        </div>
+                        <p class="offer-terms">Valid for dine-in, takeout, and delivery. Not applicable with other offers.</p>
+                        <div class="offer-actions">
+                            <button class="btn-primary" onclick="orderNow('Signature Combo')">
+                                <i class="fas fa-shopping-cart"></i> Order Now
+                            </button>
+                            <button class="btn-secondary" onclick="viewDetails('signature-combo')">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offer 2 -->
+                <div class="offer-card">
+                    <div class="offer-badge new">🆕 NEW</div>
+                    <img src="https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=800&q=80" alt="Korean Fried Chicken" class="offer-image">
+                    <div class="offer-content">
+                        <h3 class="offer-title">Korean Fried Chicken Family Pack</h3>
+                        <p class="offer-description">Feast on our famous Korean-style crispy chicken. Perfect for 3-4 people with 4 delicious dipping sauces.</p>
+                        <div class="offer-details">
+                            <div>
+                                <span class="offer-price">₩24,900</span>
+                                <span class="offer-original">₩32,000</span>
+                            </div>
+                            <div class="offer-discount">30% OFF</div>
+                        </div>
+                        <p class="offer-terms">Includes 16 pieces of chicken. Available for dine-in and takeout only.</p>
+                        <div class="offer-actions">
+                            <button class="btn-primary" onclick="orderNow('Chicken Family Pack')">
+                                <i class="fas fa-shopping-cart"></i> Order Now
+                            </button>
+                            <button class="btn-secondary" onclick="viewDetails('chicken-family')">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offer 3 -->
+                <div class="offer-card">
+                    <div class="offer-badge exclusive">⭐ EXCLUSIVE</div>
+                    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80" alt="Weekend Special" class="offer-image">
+                    <div class="offer-content">
+                        <h3 class="offer-title">Weekend Brunch Special</h3>
+                        <p class="offer-description">Saturday & Sunday only! Enjoy breakfast burgers, hash browns, and coffee for a perfect weekend start.</p>
+                        <div class="offer-details">
+                            <div>
+                                <span class="offer-price">₩12,900</span>
+                                <span class="offer-original">₩17,000</span>
+                            </div>
+                            <div class="offer-discount">24% OFF</div>
+                        </div>
+                        <p class="offer-terms">Available Saturdays & Sundays 8AM-2PM. Dine-in only at participating stores.</p>
+                        <div class="offer-actions">
+                            <button class="btn-primary" onclick="orderNow('Weekend Brunch')">
+                                <i class="fas fa-shopping-cart"></i> Order Now
+                            </button>
+                            <button class="btn-secondary" onclick="viewDetails('weekend-brunch')">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offer 4 -->
+                <div class="offer-card">
+                    <div class="offer-badge">🎯 LIMITED</div>
+                    <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=800&q=80" alt="Student Discount" class="offer-image">
+                    <div class="offer-content">
+                        <h3 class="offer-title">Student Discount Special</h3>
+                        <p class="offer-description">Flash your student ID and get 20% off on any single burger or chicken order. Everyday discount!</p>
+                        <div class="offer-details">
+                            <div>
+                                <span class="offer-price">20% OFF</span>
+                            </div>
+                            <div class="offer-discount">STUDENT</div>
+                        </div>
+                        <p class="offer-terms">Valid with student ID. One discount per student per day. All stores nationwide.</p>
+                        <div class="offer-actions">
+                            <button class="btn-primary" onclick="showStudentVerification()">
+                                <i class="fas fa-id-card"></i> Verify Student
+                            </button>
+                            <button class="btn-secondary" onclick="viewDetails('student-discount')">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offer 5 -->
+                <div class="offer-card">
+                    <div class="offer-badge hot">🔥 POPULAR</div>
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Delivery Special" class="offer-image">
+                    <div class="offer-content">
+                        <h3 class="offer-title">Free Delivery + 10% Off</h3>
+                        <p class="offer-description">Order delivery through our app and get FREE delivery plus 10% discount on orders over ₩25,000.</p>
+                        <div class="offer-details">
+                            <div>
+                                <span class="offer-price">FREE Delivery</span>
+                                <span class="offer-original">+ 10% OFF</span>
+                            </div>
+                            <div class="offer-discount">APP ONLY</div>
+                        </div>
+                        <p class="offer-terms">Minimum order ₩25,000. App orders only. Delivery areas may vary.</p>
+                        <div class="offer-actions">
+                            <button class="btn-primary" onclick="downloadApp()">
+                                <i class="fas fa-mobile-alt"></i> Get App
+                            </button>
+                            <button class="btn-secondary" onclick="viewDetails('delivery-special')">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Offer 6 -->
+                <div class="offer-card">
+                    <div class="offer-badge">🎉 CELEBRATION</div>
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=80" alt="Birthday Special" class="offer-image">
+                    <div class="offer-content">
+                        <h3 class="offer-title">Birthday Freebie</h3>
+                        <p class="offer-description">Celebrate your birthday with us! Get a free dessert or drink with any purchase during your birthday month.</p>
+                        <div class="offer-details">
+                            <div>
+                                <span class="offer-price">FREE Gift</span>
+                            </div>
+                            <div class="offer-discount">BIRTHDAY</div>
+                        </div>
+                        <p class="offer-terms">Show valid ID. Valid during birthday month. One per customer.</p>
+                        <div class="offer-actions">
+                            <button class="btn-primary" onclick="claimBirthdayGift()">
+                                <i class="fas fa-birthday-cake"></i> Claim Gift
+                            </button>
+                            <button class="btn-secondary" onclick="viewDetails('birthday-freebie')">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coupon Codes Section -->
+    <section class="coupon-section" id="coupons">
+        <div class="container">
+            <div class="section-title">
+                <h2>Digital Coupon Codes</h2>
+                <p class="section-subtitle">Use these codes at checkout for instant discounts</p>
+            </div>
+            
+            <div class="coupon-grid">
+                <!-- Coupon 1 -->
+                <div class="coupon-card">
+                    <div class="coupon-icon">
+                        <i class="fas fa-hamburger"></i>
+                    </div>
+                    <div class="coupon-content">
+                        <div class="coupon-code">WELCOME2024</div>
+                        <div class="coupon-desc">15% off on first order through app</div>
+                        <div class="coupon-validity">
+                            <i class="fas fa-calendar-alt"></i>
+                            Valid until: Dec 31, 2024
+                        </div>
+                    </div>
+                    <button class="copy-btn" onclick="copyCoupon('WELCOME2024')">COPY</button>
+                </div>
+
+                <!-- Coupon 2 -->
+                <div class="coupon-card">
+                    <div class="coupon-icon">
+                        <i class="fas fa-chicken"></i>
+                    </div>
+                    <div class="coupon-content">
+                        <div class="coupon-code">CHICKENLOVE</div>
+                        <div class="coupon-desc">₩2,000 off any chicken order over ₩15,000</div>
+                        <div class="coupon-validity">
+                            <i class="fas fa-calendar-alt"></i>
+                            Valid until: Jan 15, 2025
+                        </div>
+                    </div>
+                    <button class="copy-btn" onclick="copyCoupon('CHICKENLOVE')">COPY</button>
+                </div>
+
+                <!-- Coupon 3 -->
+                <div class="coupon-card">
+                    <div class="coupon-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="coupon-content">
+                        <div class="coupon-code">FAMILY30</div>
+                        <div class="coupon-desc">30% off Family Packs (4+ people)</div>
+                        <div class="coupon-validity">
+                            <i class="fas fa-calendar-alt"></i>
+                            Valid until: Dec 25, 2024
+                        </div>
+                    </div>
+                    <button class="copy-btn" onclick="copyCoupon('FAMILY30')">COPY</button>
+                </div>
+
+                <!-- Coupon 4 -->
+                <div class="coupon-card">
+                    <div class="coupon-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="coupon-content">
+                        <div class="coupon-code">FLASH50</div>
+                        <div class="coupon-desc">50% off on selected items (Weekdays 2-5PM)</div>
+                        <div class="coupon-validity">
+                            <i class="fas fa-calendar-alt"></i>
+                            Mon-Fri only, 2PM-5PM
+                        </div>
+                    </div>
+                    <button class="copy-btn" onclick="copyCoupon('FLASH50')">COPY</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Exclusive Section -->
+    <section class="app-section" id="app">
+        <div class="container">
+            <div class="app-container">
+                <div class="app-content">
+                    <h2>App Exclusive Offers</h2>
+                    <p>Download the Mom's Touch app to unlock special deals, earn rewards points, and get personalized offers.</p>
+                    
+                    <div class="app-features">
+                        <div class="app-feature">
+                            <i class="fas fa-gift"></i>
+                            <span>Exclusive App-Only Deals</span>
+                        </div>
+                        <div class="app-feature">
+                            <i class="fas fa-star"></i>
+                            <span>Earn Rewards Points</span>
+                        </div>
+                        <div class="app-feature">
+                            <i class="fas fa-bolt"></i>
+                            <span>Faster Ordering</span>
+                        </div>
+                        <div class="app-feature">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Store Locator</span>
+                        </div>
+                    </div>
+                    
+                    <div class="app-buttons">
+                        <a href="https://play.google.com/store/apps" target="_blank" class="app-btn">
+                            <i class="fab fa-google-play"></i>
+                            Google Play
+                        </a>
+                        <a href="https://apps.apple.com" target="_blank" class="app-btn">
+                            <i class="fab fa-app-store"></i>
+                            App Store
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="app-image">
+                    <img src="https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&w=800&q=80" alt="Mom's Touch App">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Offers Section -->
+    <section class="howto-section" id="howto">
+        <div class="container">
+            <div class="section-title">
+                <h2>How to Use Offers</h2>
+                <p class="section-subtitle">Simple steps to save money</p>
+            </div>
+            
+            <div class="howto-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Choose Your Offer</h3>
+                    <p class="step-desc">Browse our current promotions and select the offer that suits you best.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Apply Code or Show Offer</h3>
+                    <p class="step-desc">Use the coupon code at checkout online or show the offer at the store counter.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Enjoy Your Meal</h3>
+                    <p class="step-desc">Sit back, relax, and enjoy your delicious Mom's Touch meal at a discounted price!</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Share & Save More</h3>
+                    <p class="step-desc">Share your experience on social media and get additional discounts on your next visit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">MOM'S<span>TOUCH</span></div>
+                    <p>Enjoy exclusive offers and delicious Korean-style burgers & chicken at Mom's Touch.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/momstouchkorea" class="social-icon" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/momstouch.official" class="social-icon" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://twitter.com/momstouch_kr" class="social-icon" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="homepage.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="offers.html" class="active">Offers</a></li>
+                        <li><a href="#">Locations</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Offer Information</h4>
+                    <div style="margin-bottom: 20px;">
+                        <p style="color: #ccc; margin-bottom: 10px;">
+                            <i class="fas fa-phone-alt" style="margin-right: 10px;"></i>
+                            Offer Hotline: 1577-5250
+                        </p>
+                        <p style="color: #ccc; margin-bottom: 10px;">
+                            <i class="fas fa-envelope" style="margin-right: 10px;"></i>
+                            offers@momstouch.co.kr
+                        </p>
+                        <p style="color: #ccc;">
+                            <i class="fas fa-exclamation-circle" style="margin-right: 10px;"></i>
+                            Terms & Conditions Apply
+                        </p>
+                    </div>
+                    <div>
+                        <h5>Offer Hours</h5>
+                        <p style="color: #ccc; font-size: 14px;">
+                            Most offers valid during regular store hours<br>
+                            Some offers may have time restrictions
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2004-2024 Mom's Touch. All offers subject to change without notice.</p>
+                <p style="margin-top: 10px; font-size: 12px;">맛의 전쟁 - 엄마의 손맛 | 대한민국 대표 햄버거·치킨 프랜차이즈</p>
+                <p style="margin-top: 10px; font-size: 12px; color: #888;">This website is for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu functionality
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Update offer count animation
+            animateOfferCount();
+        });
+
+        // Offer functions
+        function orderNow(offerName) {
+            alert(`Added "${offerName}" to your cart!\n\nProceeding to checkout...`);
+            // In real app, this would add to cart and redirect
+        }
+
+        function viewDetails(offerId) {
+            const offerDetails = {
+                'signature-combo': 'Signature Burger Combo includes: 1 Signature Burger, Medium Fries, Medium Drink. Served with special sauce.',
+                'chicken-family': 'Family Pack includes: 16 pieces of Korean Fried Chicken (8 original, 8 spicy), 4 dipping sauces, coleslaw.',
+                'weekend-brunch': 'Weekend Brunch includes: Breakfast Burger, Hash Browns, Coffee. Available Saturdays & Sundays only.',
+                'student-discount': 'Show valid student ID at counter. 20% off any single burger or chicken item. Valid everyday.',
+                'delivery-special': 'Download our app, order delivery of ₩25,000 or more, get free delivery + 10% discount.',
+                'birthday-freebie': 'Show ID during your birthday month. Choose one: Free dessert or drink with any purchase.'
+            };
+            
+            if (offerDetails[offerId]) {
+                alert(`Offer Details:\n\n${offerDetails[offerId]}`);
+            } else {
+                alert('Offer details will be shown here.');
+            }
+        }
+
+        function showStudentVerification() {
+            const isStudent = confirm('Are you a student with valid student ID?');
+            if (isStudent) {
+                alert('🎓 Student discount applied! Show your student ID at the counter to get 20% off.');
+            } else {
+                alert('This offer is only available for students with valid ID.');
+            }
+        }
+
+        function downloadApp() {
+            alert('📱 Redirecting to app download page...\n\nGet exclusive app-only deals and rewards!');
+            // In real app, this would redirect to app store
+        }
+
+        function claimBirthdayGift() {
+            const birthMonth = prompt('Please enter your birth month (1-12):');
+            if (birthMonth && birthMonth >= 1 && birthMonth <= 12) {
+                const currentMonth = new Date().getMonth() + 1;
+                if (parseInt(birthMonth) === currentMonth) {
+                    alert('🎂 Happy Birthday!\n\nShow your ID at any Mom\'s Touch store to claim your free gift!');
+                } else {
+                    alert(`Your birthday month is ${birthMonth}. Come back then to claim your gift!`);
+                }
+            }
+        }
+
+        function copyCoupon(code) {
+            navigator.clipboard.writeText(code)
+                .then(() => {
+                    const btn = event.target;
+                    const originalText = btn.textContent;
+                    btn.textContent = 'COPIED!';
+                    btn.style.background = '#2ecc71';
+                    
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.background = '';
+                    }, 2000);
+                    
+                    alert(`Coupon code "${code}" copied to clipboard!\n\nUse it at checkout.`);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                    alert('Failed to copy coupon code. Please copy manually: ' + code);
+                });
+        }
+
+        function animateOfferCount() {
+            const countElement = document.querySelector('.offer-count');
+            if (countElement) {
+                let count = 12;
+                setInterval(() => {
+                    countElement.innerHTML = `🎁 ${count} Active Offers Available`;
+                    countElement.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        countElement.style.transform = 'scale(1)';
+                    }, 300);
+                }, 5000);
+            }
+        }
+
+        // Offer timer (example)
+        function startOfferTimer() {
+            // Set offer end date (Dec 31, 2024)
+            const offerEndDate = new Date('December 31, 2024 23:59:59').getTime();
+            
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const timeLeft = offerEndDate - now;
+                
+                if (timeLeft < 0) {
+                    clearInterval(timer);
+                    document.querySelector('.offer-hero h1').innerHTML = 'Offers Expired 🔚';
+                    document.querySelector('.offer-hero p').textContent = 'Check back soon for new offers!';
+                    return;
+                }
+                
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                
+                if (days < 7) {
+                    // Show countdown when less than 7 days left
+                    const countdownElement = document.querySelector('.offer-count');
+                    if (countdownElement) {
+                        countdownElement.innerHTML = `⏰ ${days} days ${hours} hours left!`;
+                    }
+                }
+            }, 1000 * 60); // Update every minute
+        }
+
+        // Start the timer
+        startOfferTimer();
+    </script>
+</body>
+</html>

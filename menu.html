@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's Touch Restaurant Menu</title>
+    <link rel="stylesheet" href="menu.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+     <link rel="stylesheet" href="https://img.wongnai.com/p/1920x0/2023/03/17/4618fb5ef77d43c0b38bbeabebe2faa3.jpg">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="contact.html" class="brand">
+                <img src="https://i.pinimg.com/736x/1e/1d/b8/1e1db8136895a06f427740560a2bd6e1.jpg" alt="Mother & Daughter Logo" class="brand-logo">
+                    <span class="mom">Mom’s</span>
+                    <span class="touch">Touch</span>
+            </a>
+
+
+
+            <nav class="site-nav">
+                <!-- <a class="nav-link" href="homepage.html">Home</a> -->
+                <a class="nav-link active" href="menu.html">Menu</a>
+                <a class="nav-link" href="restaurants.html">Restaurants</a>
+                <a class="nav-link" href="offers.html">Offers</a>
+                <!-- <a class="nav-link" href="checkout.html">Checkout</a> -->
+                <a class="nav-link" href="contact.html">Contact</a>
+                <!-- <a class="nav-link" href="profile.html">Profile</a> -->
+            </nav>
+            
+            <div class="header-actions">
+                <button class="cart-btn" id="cartBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <a href="profile.html" class="user-btn" title="Profile">
+                    <i class="fas fa-user"></i></a>
+            </div>
+
+           
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="menu-header">
+            <h1></i> Menyu Peiji</h1> 
+            <p class="subtitle">Explore 300+ dishes from 12 countries around the world</p>
+        </div>
+
+        <div class="menu-layout">
+            <!-- Filters Sidebar -->
+            <aside class="filters-panel">
+                <div class="filters-header">
+                    <h3><i class="fas fa-filter"></i> Filters</h3>
+                    <button class="clear-filters" id="clearAllFilters">Clear All</button>
+                </div>
+
+                <!-- Search -->
+                <div class="filter-group">
+                    <h4><i class="fas fa-search"></i> Search</h4>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search dishes...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                </div>
+
+                <!-- Price Range -->
+                <div class="filter-group">
+                    <h4><i class="fas fa-tag"></i> Price Range</h4>
+                    <div class="price-range-box">
+                        <div class="price-inputs">
+                            <div class="price-field">
+                                <label>Min</label>
+                                <input type="number" id="minPrice" placeholder="₹0" min="0" value="0">
+                            </div>
+                            <div class="price-separator">-</div>
+                            <div class="price-field">
+                                <label>Max</label>
+                                <input type="number" id="maxPrice" placeholder="₹5000" min="0" value="5000">
+                            </div>
+                        </div>
+                        <div class="price-slider">
+                            <input type="range" min="0" max="5000" value="0" class="range-min" id="rangeMin">
+                            <input type="range" min="0" max="5000" value="5000" class="range-max" id="rangeMax">
+                        </div>
+                        <div class="price-display">
+                            <span>Price: ₹<span id="priceMinDisplay">0</span> - ₹<span id="priceMaxDisplay">5000</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sort -->
+                <div class="filter-group">
+                    <h4><i class="fas fa-sort"></i> Sort By</h4>
+                    <select class="sort-select" id="sortSelect">
+                        <option value="popular">Most Popular</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name: A to Z</option>
+                    </select>
+                </div>
+
+                <!-- Countries Filter -->
+                <div class="filter-group">
+                    <h4><i class="fas fa-flag"></i> Countries</h4>
+                    <div class="countries-filter" id="countriesFilter">
+                        <!-- Countries will be populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Dietary -->
+                <div class="filter-group">
+                    <h4><i class="fas fa-leaf"></i> Dietary</h4>
+                    <div class="dietary-filters">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="vegOnly">
+                            <span class="checkmark"></span>
+                            <span class="filter-label">Vegetarian</span>
+                            <span class="veg-icon">🟢</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="nonVegOnly">
+                            <span class="checkmark"></span>
+                            <span class="filter-label">Non-Vegetarian</span>
+                            <span class="nonveg-icon">🔴</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="spicyOnly">
+                            <span class="checkmark"></span>
+                            <span class="filter-label">Spicy</span>
+                            <span class="spicy-icon">🌶️</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" id="popularOnly">
+                            <span class="checkmark"></span>
+                            <span class="filter-label">Popular Only</span>
+                            <span class="popular-icon">🔥</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="apply-filters-btn" id="applyFilters">
+                    <i class="fas fa-check"></i> Apply Filters
+                </button>
+            </aside>
+
+            <!-- Menu Content -->
+            <section class="menu-content">
+                <!-- Results Info -->
+                <div class="results-info">
+                    <div class="results-count">
+                        <span id="itemsCount">0</span> dishes found
+                    </div>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid"><i class="fas fa-th"></i></button>
+                        <button class="view-btn" data-view="list"><i class="fas fa-list"></i></button>
+                    </div>
+                </div>
+
+                <!-- Loading Skeleton -->
+                <div class="loading-skeleton" id="loadingSkeleton">
+                    <!-- Skeleton items will be shown while loading -->
+                </div>
+
+                <!-- Menu Grid - 3 dishes per line -->
+                <div class="menu-grid" id="menuGrid">
+                    <!-- Dishes will be loaded here by JavaScript -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be loaded here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be added here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="total-price">₹0</span>
+            </div>
+            <a href="checkout.html" class="checkout-btn">Checkout</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Mom's Touch</h4>
+                    <p>Experience world cuisine at your doorstep. Order from 12+ countries.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="about.html">About Us</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="help.html">Help Center</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 11 Seoae-ro 1-gil, Jung District, Seoul, South Korea</p>
+                    <p><i class="fas fa-phone"></i> +91 9100786139</p>
+                    <p><i class="fas fa-envelope"></i> order@mom'stouch.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <!-- <p>&copy; 2003 Mom's Touch. All rights reserved. | This is a demo project for educational purposes.</p> -->
+                 <p>&copy; 2004-2024 Mom's Touch. All rights reserved.</p>
+                <p style="margin-top: 10px; font-size: 12px;">맛의 전쟁 - 엄마의 손맛 | 대한민국 대표 햄버거·치킨 프랜차이즈</p>
+                <p style="margin-top: 10px; font-size: 12px; color: #888;">This website is for educational purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="menu-item">
+    <div class="menu-item-img">
+        <img src="item-image.jpg" alt="Item Name">
+        <button class="favorite-btn" 
+                data-item-id="item1"
+                data-item-name="Butter Chicken"
+                data-item-price="349"
+                data-item-image="item-image.jpg"
+                data-item-category="Indian Main Course">
+            <i class="far fa-heart"></i>
+        </button>
+    </div>
+</div>
+
+    <!-- Notification Toast -->
+    <div class="toast" id="toast"></div>
+
+    <!-- JavaScript -->
+    <script src="menu.js" defer></script>
+</body>
+</html>

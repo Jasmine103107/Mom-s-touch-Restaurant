@@ -1,0 +1,626 @@
+<!-- [file name]: index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's Touch Restaurant - Welcome</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .tabs-container {
+            width: 100%;
+            max-width: 450px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .tabs-header {
+            background-color: #ff6b6b;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .tabs-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .tabs-header h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tabs-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #ff6b6b;
+            background-color: white;
+            border-bottom: 3px solid #ff6b6b;
+        }
+
+        .tab-content {
+            padding: 30px;
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #ff6b6b;
+            outline: none;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember input {
+            margin-right: 8px;
+        }
+
+        .remember label {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .forgot-link {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .action-btn:hover {
+            background-color: #ff5252;
+        }
+
+        .guest-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: transparent;
+            color: #ff6b6b;
+            border: 1px solid #ff6b6b;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .guest-btn:hover {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        .switch-link {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .switch-link p {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .switch-link a {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .switch-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #ff5252;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .demo-info {
+            margin-top: 30px;
+            background: #fff2e6;
+            padding: 12px 15px;
+            border-left: 5px solid #ff6b6b;
+            border-radius: 6px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .demo-info.active {
+            display: block;
+        }
+
+        .demo-info p {
+            margin: 5px 0;
+        }
+
+        /* Hero section styling */
+        .hero-section {
+            width: 75%;
+            background: url('https://media.istockphoto.com/id/1038108608/photo/bowls-with-chow-mein.jpg?s=612x612&w=0&k=20&c=BioejbjglNwOp6yeRnOAcPCHuK5Ixr8cQJCNFQDX5oI=') no-repeat center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            width: 40%;
+            height: 30%;
+            left: 0%;
+            background: rgb(223, 148, 8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: white;
+            text-align: center;
+            padding: 40px;
+            max-width: 700px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        .form-section {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+
+        .container-wrapper {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container-wrapper {
+                flex-direction: column;
+            }
+            
+            .hero-section, .form-section {
+                width: 100%;
+                min-height: auto;
+            }
+            
+            .hero-section {
+                height: 300px;
+            }
+            
+            .form-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-overlay">
+                <div class="hero-content">
+                    <h1>WELCOME TO<br>Mom's Touch</h1>
+                    <p>Online Restaurant & Beverage Ordering App</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Section -->
+        <div class="form-section">
+            <div class="tabs-container">
+                <div class="tabs-header">
+                    <h1>WELCOME TO</h1>
+                    <h2>Mom's Touch</h2>
+                    <p>Online Restaurant & Beverage Ordering App</p>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('login')">Login</button>
+                    <button class="tab" onclick="switchTab('signup')">Sign Up</button>
+                </div>
+
+                <!-- Login Tab -->
+                <div id="login-tab" class="tab-content active">
+                    <h3>Login to Our Restaurant Panel</h3>
+                    
+                    <form id="loginForm">
+                        <div class="input-group">
+                            <label for="loginEmail">Your Email</label>
+                            <input type="email" id="loginEmail" placeholder="Enter email" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="loginPassword">Password</label>
+                            <input type="password" id="loginPassword" placeholder="Enter password" required>
+                        </div>
+                        
+                        <div class="remember-forgot">
+                            <div class="remember">
+                                <input type="checkbox" id="rememberMe">
+                                <label for="rememberMe">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-link">Forgot Password</a>
+                        </div>
+                        
+                        <button type="submit" class="action-btn">Login</button>
+                    </form>
+
+                    <div class="guest-login">
+                        <button class="guest-btn" onclick="loginAsGuest()">Continue as Guest</button>
+                    </div>
+
+                    <div class="switch-link">
+                        <p>Don't have an account? <a onclick="switchTab('signup')">Sign up here</a></p>
+                    </div>
+
+                    <div class="demo-info" id="loginDemo">
+                        <p><b>Demo Account:</b></p>
+                        <p><b>Email:</b> test.restaurant@gmail.com</p>
+                        <p><b>Password:</b> 2501050038</p>
+                    </div>
+                </div>
+
+                <!-- Sign Up Tab -->
+                <div id="signup-tab" class="tab-content">
+                    <h3>Create Your Account</h3>
+                    
+                    <form id="signupForm">
+                        <div class="input-group">
+                            <label for="signupName">Full Name</label>
+                            <input type="text" id="signupName" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="signupEmail">Your Email</label>
+                            <input type="email" id="signupEmail" placeholder="Enter email" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" placeholder="Enter password" required>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        </div>
+                        
+                        <button type="submit" class="action-btn">Sign Up</button>
+                    </form>
+
+                    <div class="switch-link">
+                        <p>Already have an account? <a onclick="switchTab('login')">Login here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Update tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Activate selected tab
+            if (tabName === 'login') {
+                document.querySelector('.tab:first-child').classList.add('active');
+                document.getElementById('login-tab').classList.add('active');
+                document.getElementById('loginDemo').classList.add('active');
+            } else {
+                document.querySelector('.tab:last-child').classList.add('active');
+                document.getElementById('signup-tab').classList.add('active');
+                document.getElementById('loginDemo').classList.remove('active');
+            }
+        }
+
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            // Demo account check
+            if (email === 'test.restaurant@gmail.com' && password === '2501050038') {
+                alert('Login Successful with Demo Account!');
+                // Create demo user profile
+                const demoUser = {
+                    name: 'Demo Restaurant',
+                    email: email,
+                    password: password,
+                    isDemo: true
+                };
+                localStorage.setItem('currentUser', JSON.stringify(demoUser));
+                window.location.href = 'menu.html';
+                return;
+            }
+
+            // Check for registered users
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                // Load user data and create profile if needed
+                loadUserData(user.email);
+                alert('Login Successful!');
+                window.location.href = 'menu.html';
+            } else {
+                alert('Invalid email or password!');
+            }
+        });
+
+        // Handle signup form submission - creates new account for each unique email
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Validate inputs
+            if (!name || !email || !password) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                alert('Passwords do not match. Please try again.');
+                return;
+            }
+            
+            // Validate password length
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long.');
+                return;
+            }
+            
+            // Get existing users from localStorage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            
+            // Check if email already exists
+            const existingUser = users.find(u => u.email === email);
+            if (existingUser) {
+                alert('An account with this email already exists. Please login instead.');
+                return;
+            }
+            
+            // Create new user object
+            const newUser = {
+                name: name,
+                email: email,
+                password: password,
+                createdAt: new Date().toISOString(),
+                isGuest: false
+            };
+            
+            // Add new user to users array
+            users.push(newUser);
+            
+            // Save updated users array to localStorage
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            // Store current user in localStorage
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            
+            // Create user profile
+            createUserProfile(newUser);
+            
+            alert('Account created successfully! Welcome to Mom\'s Touch!');
+            window.location.href = 'menu.html';
+        });
+
+        // Guest login functionality
+        function loginAsGuest() {
+            const guestEmail = `guest_${Date.now()}@example.com`;
+            const guestUser = {
+                name: 'Guest',
+                email: guestEmail,
+                isGuest: true,
+                createdAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem('currentUser', JSON.stringify(guestUser));
+            createUserProfile(guestUser);
+            alert('Logged in as Guest!');
+            window.location.href = 'menu.html';
+        }
+
+        // Function to load user data and create profile if needed
+        function loadUserData(email) {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(u => u.email === email);
+            
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                
+                // Check if user profile exists
+                const existingProfile = JSON.parse(localStorage.getItem('userProfile'));
+                if (!existingProfile || existingProfile.email !== email) {
+                    createUserProfile(user);
+                }
+            }
+        }
+
+        // Function to create user profile
+        function createUserProfile(user) {
+            const userProfile = {
+                name: user.name || user.email.split('@')[0],
+                email: user.email,
+                phone: '',
+                joinDate: user.createdAt || new Date().toISOString(),
+                avatar: null,
+                address: {
+                    street: '',
+                    city: '',
+                    state: '',
+                    zipCode: '',
+                    country: ''
+                },
+                preferences: {
+                    notifications: true,
+                    emailUpdates: true,
+                    theme: 'light',
+                    language: 'en'
+                },
+                orderHistory: [],
+                favorites: [],
+                isGuest: user.isGuest || false,
+                lastLogin: new Date().toISOString()
+            };
+            
+            localStorage.setItem('userProfile', JSON.stringify(userProfile));
+        }
+
+        // Function to logout user
+        function logout() {
+            // Save last login time before logout
+            const userProfile = JSON.parse(localStorage.getItem('userProfile'));
+            if (userProfile) {
+                userProfile.lastLogout = new Date().toISOString();
+                localStorage.setItem('userProfile', JSON.stringify(userProfile));
+            }
+            
+            // Clear current user session
+            localStorage.removeItem('currentUser');
+            
+            // Redirect to login page
+            window.location.href = 'index.html';
+        }
+
+        // Check if user is already logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (currentUser && !currentUser.isGuest) {
+                // Check if user still exists in users list
+                const users = JSON.parse(localStorage.getItem('users')) || [];
+                const userExists = users.some(u => u.email === currentUser.email);
+                
+                if (userExists) {
+                    window.location.href = 'menu.html';
+                } else {
+                    // User doesn't exist anymore, clear session
+                    localStorage.removeItem('currentUser');
+                }
+            } else if (currentUser && currentUser.isGuest) {
+                // Guest users can stay logged in
+                window.location.href = 'menu.html';
+            }
+        });
+    </script>
+</body>
+</html>

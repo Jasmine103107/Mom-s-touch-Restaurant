@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mom's Touch RestaurantCheckout</title>
+    <link rel="stylesheet" href="checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="contact.html" class="brand">
+                <img src="https://i.pinimg.com/736x/1e/1d/b8/1e1db8136895a06f427740560a2bd6e1.jpg" alt="Mother & Daughter Logo" class="brand-logo">
+                <span class="mom">Mom’s</span>
+                <span class="touch">Touch</span>
+            </a>
+            
+            <nav class="site-nav">
+                <!-- <a class="nav-link" href="homepage.html">Home</a> -->
+                <a class="nav-link" href="menu.html">Menu</a>
+                <a class="nav-link" href="restaurants.html">Restaurants</a>
+                <a class="nav-link active" href="checkout.html">Checkout</a>
+                <a class="nav-link" href="contact.html">Contact</a>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="checkout.html" class="cart-btn-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <button class="user-btn">
+                    <i class="fas fa-user"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="checkout-header">
+            <h1><i class="fas fa-shopping-bag"></i> Complete Your Order</h1>
+            <p class="subtitle">Review your items and enter delivery details</p>
+        </div>
+
+        <div class="checkout-layout">
+            <!-- Left Column - Order Summary -->
+            <div class="order-summary-col">
+                <div class="order-card">
+                    <div class="order-card-header">
+                        <h3><i class="fas fa-shopping-cart"></i> Your Order</h3>
+                        <span class="item-count" id="itemCount">0 items</span>
+                    </div>
+                    <!-- UPI Scanner (shown when UPI selected) -->
+                    <div class="upi-scanner-section" id="upiScanner" style="display: none; margin-top:12px;">
+                        <div class="qr-scanner-container">
+                            <div class="qr-code-placeholder" id="qrCodePlaceholder">
+                                <i class="fas fa-qrcode" style="font-size: 3rem; color: #667eea; margin-bottom: 1rem;"></i>
+                                <p>Scan QR to pay</p>
+                            </div>
+                            <p class="qr-instructions">Scan this QR code with any UPI app to pay.</p>
+                        </div>
+                        <div class="upi-id-section" style="margin-top:10px;">
+                            <h4>Or pay using UPI ID</h4>
+                            <div class="upi-id-display">
+                                <span class="upi-id-text" id="upiIdText">order.momstouch@upi</span>
+                                <button class="btn-copy" id="copyUpiId">
+                                    <i class="far fa-copy"></i> Copy
+                                </button>
+                            </div>
+                            <div class="upi-apps" style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+                                <a href="upi://pay?pa=order.momstouch@upi&pn=Mom%27s%20Touch&am=${orderData.total}" class="upi-app-btn" data-base="upi://pay?pa=order.momstouch@upi&pn=Mom%27s%20Touch&am=${orderData.total}" target="_blank">
+                                    <div class="upi-app-icon" style="background: #00B9F1;">
+                                        <i class="fab fa-google-pay"></i>
+                                    </div>
+                                    <span>Google Pay</span>
+                                </a>
+                                <a href="phonepe://pay?pa=order.momstouch@upi&am=${orderData.total}" class="upi-app-btn" data-base="phonepe://pay?pa=order.momstouch@upi&am=${orderData.total}" target="_blank">
+                                    <div class="upi-app-icon" style="background: #5F2EE5;">
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </div>
+                                    <span>PhonePe</span>
+                                </a>
+                                <a href="paytmmp://pay?pa=order.momstouch@upi&am=${orderData.total}" class="upi-app-btn" data-base="paytmmp://pay?pa=order.momstouch@upi&am=${orderData.total}" target="_blank">
+                                    <div class="upi-app-icon" style="background: #00BAF2;">
+                                        <i class="fab fa-paypal"></i>
+                                    </div>
+                                    <span>Paytm</span>
+                                </a>
+                                <a href="bhim://pay?pa=order.momstouch@upi&am=${orderData.total}" class="upi-app-btn" data-base="bhim://pay?pa=order.momstouch@upi&am=${orderData.total}" target="_blank">
+                                    <div class="upi-app-icon" style="background: #3C1E7C;">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                    <span>BHIM</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="order-items" id="orderItems">
+                        <!-- Cart items will load here -->
+                        <div class="empty-order" id="emptyOrder">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h4>Your cart is empty</h4>
+                            <p>Add delicious dishes from our menu</p>
+                            <a href="menu.html" class="btn-browse">
+                                <i class="fas fa-utensils"></i> Browse Menu
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="order-summary">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span class="amount" id="subtotalAmount">₹0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Delivery Fee</span>
+                            <span class="amount" id="deliveryAmount">₹49</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (5%)</span>
+                            <span class="amount" id="taxAmount">₹0</span>
+                        </div>
+                        <div class="summary-row total-row">
+                            <span>Total Amount</span>
+                            <span class="amount" id="totalAmount">₹49</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="delivery-time-card">
+                    <div class="time-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="time-info">
+                        <h4>Delivery in 50-75 minutes</h4>
+                        <p>Order now to get it soon!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Checkout Form -->
+            <div class="checkout-form-col">
+                <!-- Delivery Details -->
+                <div class="form-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Delivery Details</h3>
+                    
+                    <form id="deliveryForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" placeholder="Enter your full name" required>
+                            <div class="error-message" id="nameError"></div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" placeholder="+91 xxxx xxxx xx" required>
+                                <div class="error-message" id="phoneError"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" placeholder="you@example.com">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="address">Delivery Address *</label>
+                            <textarea id="address" rows="3" placeholder="House no, Street, Area, Landmark" required></textarea>
+                            <div class="error-message" id="addressError"></div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" placeholder="Enter your city" required>
+                                <div class="error-message" id="cityError"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pincode">Pincode *</label>
+                                <input type="text" id="pincode" placeholder="Enter pincode" required>
+                                <div class="error-message" id="pincodeError"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="instructions">Delivery Instructions (Optional)</label>
+                            <textarea id="instructions" rows="2" placeholder="e.g., Call before delivery, Leave at gate, etc."></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="form-section">
+                    <h3><i class="fas fa-credit-card"></i> Payment Method</h3>
+                    
+                    <div class="payment-methods">
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="card" checked>
+                            <span class="payment-content">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Credit/Debit Card</span>
+                            </span>
+                        </label>
+                        
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="upi">
+                            <span class="payment-content">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>UPI Payment</span>
+                            </span>
+                        </label>
+                        
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="cod">
+                            <span class="payment-content">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Cash on Delivery</span>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <!-- Card Details (shown only when card is selected) -->
+                    <div class="card-details" id="cardDetails">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" id="cardNumber" placeholder="xxxx xxxx xxxx xxxx" maxlength="19">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardName">Name on Card</label>
+                                <input type="text" id="cardName" placeholder="Jasmine">
+                            </div>
+                            <div class="form-group">
+                                <label for="expiry">Expiry Date</label>
+                                <input type="text" id="expiry" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="password" id="cvv" placeholder="xxx" maxlength="3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Place Order -->
+                <div class="form-section place-order-section">
+                    <div class="order-summary-box">
+                        <div class="order-total">
+                            <span>Order Total</span>
+                            <span class="total-price" id="orderTotal">₹49</span>
+                        </div>
+                        <p class="tax-info">Includes all taxes and delivery charges</p>
+                    </div>
+                    
+                    <div class="terms-agreement">
+                        <label class="checkbox">
+                            <input type="checkbox" id="agreeTerms">
+                            <span class="checkmark"></span>
+                            <span class="label-text">
+                                I agree to the <a href="terms.html">Terms of Service</a> and 
+                                <a href="privacy.html">Privacy Policy</a>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <button class="place-order-btn" id="placeOrderBtn" disabled>
+                        <i class="fas fa-lock"></i>
+                        <span>Place Secure Order - </span>
+                        <span id="finalAmount">₹49</span>
+                    </button>
+                    
+                    <div class="secure-payment">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Your payment is secured with 256-bit SSL encryption</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Order Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="success-icon">
+                    <div class="icon-circle">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                
+                <h2>Order Confirmed! 🎉</h2>
+                <p class="success-message">Thank you for your order. We're preparing it now!</p>
+                
+                <div class="order-details">
+                    <div class="detail-row">
+                        <span class="label">Order ID:</span>
+                        <span class="value" id="orderId">#MT123456</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Estimated Delivery:</span>
+                        <span class="value">30-45 minutes</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Delivery Address:</span>
+                        <span class="value" id="deliveryAddressInfo">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="label">Payment Method:</span>
+                        <span class="value" id="paymentMethodInfo">-</span>
+                    </div>
+                    <div class="detail-row total-row">
+                        <span class="label">Total Amount:</span>
+                        <span class="value" id="orderTotalInfo">₹0</span>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="btn-track" id="trackOrderBtn">
+                        <i class="fas fa-map-marker-alt"></i> Track Order
+                    </button>
+                    <button class="btn-continue" id="continueShoppingBtn">
+                        <i class="fas fa-shopping-bag"></i> Continue Shopping
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Mom's Touch</h4>
+                    <p>Experience world cuisine at your doorstep. Order from 12+ countries.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="about.html">About Us</a>
+                    <a href="careers.html">Careers</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="help.html">Help Center</a>
+                    <a href="faq.html">FAQ</a>
+                    <a href="terms.html">Terms</a>
+                    <a href="privacy.html">Privacy</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 11 Seoae-ro 1-gil, Jung District, Seoul, South Korea</p>
+                    <p><i class="fas fa-phone"></i> +82 1577-5250</p>
+                    <p><i class="fas fa-envelope"></i> order@mom'stouch.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Mom's Touch. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Processing Overlay -->
+<div class="processing-overlay" id="processingOverlay">
+    <div class="processing-content">
+        <div class="processing-spinner-large"></div>
+        <h3 class="processing-title">Placing Your Order...</h3>
+        <p class="processing-subtitle">Please wait while we process your order</p>
+    </div>
+</div>
+</div>
+
+    <script src="checkout.js"></script>
+</body>
+</html>
